@@ -1,0 +1,6 @@
+framework module video_360 {
+  umbrella header "video_360-umbrella.h"
+
+  export *
+  module * { export * }
+}

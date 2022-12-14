@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "929460892744",
+    "project_id": "artist-replugged",
+    "storage_bucket": "artist-replugged.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929460892744:android:266579ee11d1e46d26547d",
+        "android_client_info": {
+          "package_name": "com.app.artistreplugged"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929460892744-osdnuhbgh5e2eun8engra8369ku5eiu3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8CQOCeDYI-73ZcXIFtRi1W2EPs3R09Zg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "929460892744-osdnuhbgh5e2eun8engra8369ku5eiu3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "929460892744-hosd6lo0kuelhkbe13l6cq2qeqgq0rdn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.atx.Artist-Replugged",
+                "app_store_id": "1551661875"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
