@@ -166,152 +166,131 @@ class _ArpMovieSelectionScreenState extends State<ArpMovieSelectionScreen> {
                                   return state.arpViewModel.data!.types![index]
                                               .type ==
                                           types
-                                      ? Column(
-                                          children: [
-                                            Stack(
-                                              children: [
-                                                SizedBox(
-                                                    height: 400,
-                                                    child: CachedNetworkImage(
-                                                      imageUrl: (state
-                                                          .arpViewModel
-                                                          .data!
-                                                          .types![index]
-                                                          .s3ImageUrl
-                                                          .toString()),
-                                                      height: 180,
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                              .size
-                                                              .width,
-                                                      fit: BoxFit.cover,
-                                                      progressIndicatorBuilder:
-                                                          (context, url,
-                                                                  downloadProgress) =>
-                                                              const CupertinoActivityIndicator(
-                                                        color: Colors.white,
-                                                      ),
-                                                    )),
-                                                InkWell(
-                                                  onTap: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: Container(
-                                                    height: 90,
-                                                    width: 50,
-                                                    child: Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                top: 20),
-                                                        child: Icon(
-                                                          Icons.arrow_back,
-                                                          size: 35,
-                                                          color: Colors.white,
-                                                        )),
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 170),
-                                                  child: Center(
-                                                    child: InkWell(
-                                                      onTap: () async {
-                                                        if (state
+                                      ? InkWell(
+                                          onTap: () async {
+                                            if (state.arpViewModel.data!
+                                                .types![index].s3VideoUrl
+                                                .toString()
+                                                .endsWith('.mp4')) {
+                                              print(
+                                                  '==========================?');
+                                              state.arpViewModel.data!
+                                                  .types![index].views = state
+                                                      .arpViewModel
+                                                      .data!
+                                                      .types![index]
+                                                      .views!
+                                                      .toInt() +
+                                                  1;
+
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      fullscreenDialog: true,
+                                                      builder: (_) =>
+                                                          MyHomePage(
+                                                            watchId: state
+                                                                .arpViewModel
+                                                                .data!
+                                                                .id
+                                                                .toString(),
+                                                            type: state
+                                                                .arpViewModel
+                                                                .data!
+                                                                .types![index]
+                                                                .type
+                                                                .toString(),
+                                                            videoUrl: state
+                                                                .arpViewModel
+                                                                .data!
+                                                                .types![index]
+                                                                .s3VideoUrl
+                                                                .toString(),
+                                                            count: 1,
+                                                            videoTime: state
+                                                                .arpViewModel
+                                                                .data!
+                                                                .types![index]
+                                                                .videoLength
+                                                                .toString(),
+                                                          )));
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(const SnackBar(
+                                                      backgroundColor:
+                                                          Colors.white,
+                                                      content: Text(
+                                                        'VideoError: Failed to load video',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                      )));
+                                            }
+                                            Map<String, String> headers =
+                                                <String, String>{
+                                              'authorization':
+                                                  'Bearer ${prefHelper.getStringByKey('token', '')}',
+                                            };
+
+                                            final response = await http.post(
+                                                ArtistConstant.clipViewUrl,
+                                                headers: headers,
+                                                body: <String, dynamic>{
+                                                  'id': state.arpViewModel.data!
+                                                      .types![index].id!
+                                                      .toString(),
+                                                  'type': 'documentary_type'
+                                                });
+                                            print(response.body);
+                                          },
+                                          child: Column(
+                                            children: [
+                                              Stack(
+                                                children: [
+                                                  SizedBox(
+                                                      height: 400,
+                                                      child: CachedNetworkImage(
+                                                        imageUrl: (state
                                                             .arpViewModel
                                                             .data!
                                                             .types![index]
-                                                            .s3VideoUrl
-                                                            .toString()
-                                                            .endsWith('.mp4')) {
-                                                          print(
-                                                              '==========================?');
-                                                          state
-                                                              .arpViewModel
-                                                              .data!
-                                                              .types![index]
-                                                              .views = state
-                                                                  .arpViewModel
-                                                                  .data!
-                                                                  .types![index]
-                                                                  .views!
-                                                                  .toInt() +
-                                                              1;
-
-                                                          Navigator.of(context).push(
-                                                              MaterialPageRoute(
-                                                                  fullscreenDialog:
-                                                                      true,
-                                                                  builder: (_) =>
-                                                                      MyHomePage(
-                                                                        watchId: state
-                                                                            .arpViewModel
-                                                                            .data!
-                                                                            .id
-                                                                            .toString(),
-                                                                        type: state
-                                                                            .arpViewModel
-                                                                            .data!
-                                                                            .types![index]
-                                                                            .type
-                                                                            .toString(),
-                                                                        videoUrl: state
-                                                                            .arpViewModel
-                                                                            .data!
-                                                                            .types![index]
-                                                                            .s3VideoUrl
-                                                                            .toString(),
-                                                                        count:
-                                                                            1,
-                                                                        videoTime: state
-                                                                            .arpViewModel
-                                                                            .data!
-                                                                            .types![index]
-                                                                            .videoLength
-                                                                            .toString(),
-                                                                      )));
-                                                        } else {
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .showSnackBar(
-                                                                  const SnackBar(
-                                                                      backgroundColor:
-                                                                          Colors
-                                                                              .white,
-                                                                      content:
-                                                                          Text(
-                                                                        'VideoError: Failed to load video',
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                Colors.black),
-                                                                      )));
-                                                        }
-                                                        Map<String, String>
-                                                            headers =
-                                                            <String, String>{
-                                                          'authorization':
-                                                              'Bearer ${prefHelper.getStringByKey('token', '')}',
-                                                        };
-
-                                                        final response =
-                                                            await http.post(
-                                                                ArtistConstant
-                                                                    .clipViewUrl,
-                                                                headers:
-                                                                    headers,
-                                                                body: <String,
-                                                                    dynamic>{
-                                                              'id': state
-                                                                  .arpViewModel
-                                                                  .data!
-                                                                  .types![index]
-                                                                  .id!
-                                                                  .toString(),
-                                                              'type':
-                                                                  'documentary_type'
-                                                            });
-                                                        print(response.body);
-                                                      },
+                                                            .s3ImageUrl
+                                                            .toString()),
+                                                        height: 180,
+                                                        width: MediaQuery.of(
+                                                                context)
+                                                            .size
+                                                            .width,
+                                                        fit: BoxFit.cover,
+                                                        progressIndicatorBuilder:
+                                                            (context, url,
+                                                                    downloadProgress) =>
+                                                                const CupertinoActivityIndicator(
+                                                          color: Colors.white,
+                                                        ),
+                                                      )),
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: Container(
+                                                      height: 90,
+                                                      width: 50,
+                                                      child: Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  top: 20),
+                                                          child: Icon(
+                                                            Icons.arrow_back,
+                                                            size: 35,
+                                                            color: Colors.white,
+                                                          )),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 170),
+                                                    child: Center(
                                                       child: AvatarGlow(
                                                         glowColor:
                                                             Color(0XFFffffff),
@@ -346,338 +325,347 @@ class _ArpMovieSelectionScreenState extends State<ArpMovieSelectionScreen> {
                                                       ),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                            Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 30,
-                                                        vertical: 20),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Expanded(
-                                                          child: Text(
-                                                            '${state.arpViewModel.data!.city.toString()}, ${state.arpViewModel.data!.state.toString()} - ${state.arpViewModel.data!.genre.toString()}',
-                                                            style: ArtistTextStyle
-                                                                .smallHeadingTextStyle,
-                                                          ),
-                                                        ),
-                                                        IconButton(
-                                                            onPressed: () {
-                                                              prefHelper.saveString(
-                                                                  counts,
-                                                                  'Documentary like');
-                                                              decide =
-                                                                  'Documentary like';
-
-                                                              KiwiContainer().resolve<
-                                                                      DocumentaryLikeDislike>()(
-                                                                  DocumentaryParams(
-                                                                      id: prefHelper.getStringByKey(
-                                                                          'idforgetData',
-                                                                          ''),
-                                                                      type:
-                                                                          'like'));
-                                                              setState(() {});
-                                                            },
-                                                            icon: prefHelper
-                                                                        .getStringByKey(
-                                                                            counts,
-                                                                            '')
-                                                                        .toString() ==
-                                                                    'Documentary like'
-                                                                ? const Icon(
-                                                                    Icons
-                                                                        .thumb_up_alt,
-                                                                    color: Colors
-                                                                        .white,
-                                                                  )
-                                                                : const Icon(
-                                                                    Icons
-                                                                        .thumb_up_alt_outlined,
-                                                                    color: Colors
-                                                                        .white,
-                                                                  )),
-                                                        IconButton(
-                                                            onPressed: () {
-                                                              prefHelper.saveString(
-                                                                  counts,
-                                                                  'Documentary dislike');
-                                                              decide =
-                                                                  'Documentary dislike';
-                                                              KiwiContainer().resolve<
-                                                                      DocumentaryLikeDislike>()(
-                                                                  DocumentaryParams(
-                                                                      id: prefHelper.getStringByKey(
-                                                                          'idforgetData',
-                                                                          ''),
-                                                                      type:
-                                                                          'dislike'));
-                                                              setState(() {});
-                                                            },
-                                                            icon: prefHelper
-                                                                        .getStringByKey(
-                                                                            counts,
-                                                                            '')
-                                                                        .toString() ==
-                                                                    'Documentary dislike'
-                                                                ? const Icon(
-                                                                    Icons
-                                                                        .thumb_down_alt,
-                                                                    color: Colors
-                                                                        .white,
-                                                                  )
-                                                                : const Icon(
-                                                                    Icons
-                                                                        .thumb_down_alt_outlined,
-                                                                    color: Colors
-                                                                        .white,
-                                                                  )),
-                                                        InkWell(
-                                                          onTap: () async {
-                                                            showDialog(
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    ((context) {
-                                                                  return indiator(
-                                                                      Colors
-                                                                          .white);
-                                                                }));
-
-                                                            Navigator.pop(
-                                                                context);
-
-                                                            Share.share(
-                                                                'https://dev.artistreplugged.com/documentary-share/${state.arpViewModel.data!.id.toString()}');
-                                                          },
-                                                          child: Image.asset(
-                                                            'assets/icons/icon_share@3x.png',
-                                                            height: 30,
-                                                            color: Colors.white,
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Image.network(
-                                                          state.arpViewModel
-                                                              .data!.s3LogoUrl
-                                                              .toString(),
-                                                          height: 40,
-                                                          width: 80,
-                                                          fit: BoxFit.contain,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .symmetric(
-                                                                  horizontal:
-                                                                      15),
-                                                          child: InkWell(
-                                                            onTap: () async {
-                                                              Navigator.of(context).push(
-                                                                  MaterialPageRoute(
-                                                                      fullscreenDialog:
-                                                                          true,
-                                                                      builder: (_) =>
-                                                                          ListentomyMusic(
-                                                                            url:
-                                                                                state.arpViewModel.data!.musicUrl.toString(),
-                                                                          )));
-                                                            },
-                                                            child: Container(
-                                                              padding: const EdgeInsets
-                                                                      .symmetric(
-                                                                  horizontal: 8,
-                                                                  vertical: 8),
-                                                              decoration: BoxDecoration(
-                                                                  color: ArtistColor
-                                                                      .buttomBarColor,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8)),
-                                                              child: Row(
-                                                                children: [
-                                                                  const Icon(Icons
-                                                                      .headphones),
-                                                                  Text(
-                                                                    '  Listen to my music'
-                                                                        .toUpperCase(),
-                                                                    style: const TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  )
-                                                                ],
-                                                              ),
+                                                ],
+                                              ),
+                                              Container(
+                                                  padding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 30,
+                                                      vertical: 20),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Expanded(
+                                                            child: Text(
+                                                              '${state.arpViewModel.data!.city.toString()}, ${state.arpViewModel.data!.state.toString()} - ${state.arpViewModel.data!.genre.toString()}',
+                                                              style: ArtistTextStyle
+                                                                  .smallHeadingTextStyle,
                                                             ),
                                                           ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 7,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        state
-                                                                    .arpViewModel
-                                                                    .data!
-                                                                    .types![
-                                                                        index]
-                                                                    .videoLength
-                                                                    .toString() !=
-                                                                'null'
-                                                            ? Text(
-                                                                hrStr,
-                                                                style: ArtistTextStyle
-                                                                    .smallHeadingTextStyle,
-                                                              )
-                                                            : Container(),
-                                                        Text(
-                                                          ' | ${state.arpViewModel.data!.views!.toInt()} Views',
-                                                          style: ArtistTextStyle
-                                                              .smallHeadingTextStyle,
-                                                        )
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 3,
-                                                    ),
-                                                    Text(
-                                                      prefHelper.getStringByKey(
-                                                          'descriptions', ''),
-                                                      style: ArtistTextStyle
-                                                          .smallHeadingTextStyle,
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 30,
-                                                    ),
-                                                    Column(
-                                                      children: [
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: [
-                                                            Expanded(
-                                                              child: Column(
-                                                                children: [
-                                                                  InkWell(
-                                                                    onTap: () {
-                                                                      setState(
-                                                                          () {
-                                                                        count =
-                                                                            0;
-                                                                      });
+                                                          IconButton(
+                                                              onPressed: () {
+                                                                prefHelper
+                                                                    .saveString(
+                                                                        counts,
+                                                                        'Documentary like');
+                                                                decide =
+                                                                    'Documentary like';
 
-                                                                      BlocProvider.of<ArpSelectionBloc>(context).add(GetDataChanged(prefHelper.getStringByKey(
-                                                                          'idforgetData',
-                                                                          '')));
-                                                                    },
-                                                                    child:
-                                                                        Container(
-                                                                      height:
-                                                                          40,
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .center,
-                                                                      child: Text(
-                                                                          'Scenes',
-                                                                          style: count == 0
-                                                                              ? const TextStyle(
-                                                                                  fontFamily: 'Roboto',
-                                                                                  fontSize: 14,
-                                                                                  fontWeight: FontWeight.w300,
-                                                                                  color: ArtistColor.searchGreyColor,
-                                                                                )
-                                                                              : ArtistTextStyle.smallHeadingTextStyle),
-                                                                    ),
-                                                                  ),
-                                                                  const SizedBox(
-                                                                    height: 2,
-                                                                  ),
-                                                                  if (count ==
-                                                                      0)
-                                                                    Container(
+                                                                KiwiContainer()
+                                                                    .resolve<
+                                                                        DocumentaryLikeDislike>()(DocumentaryParams(
+                                                                    id: prefHelper
+                                                                        .getStringByKey(
+                                                                            'idforgetData',
+                                                                            ''),
+                                                                    type:
+                                                                        'like'));
+                                                                setState(() {});
+                                                              },
+                                                              icon: prefHelper
+                                                                          .getStringByKey(
+                                                                              counts,
+                                                                              '')
+                                                                          .toString() ==
+                                                                      'Documentary like'
+                                                                  ? const Icon(
+                                                                      Icons
+                                                                          .thumb_up_alt,
                                                                       color: Colors
                                                                           .white,
-                                                                      height: 2,
-                                                                      width: 60,
                                                                     )
-                                                                ],
+                                                                  : const Icon(
+                                                                      Icons
+                                                                          .thumb_up_alt_outlined,
+                                                                      color: Colors
+                                                                          .white,
+                                                                    )),
+                                                          IconButton(
+                                                              onPressed: () {
+                                                                prefHelper
+                                                                    .saveString(
+                                                                        counts,
+                                                                        'Documentary dislike');
+                                                                decide =
+                                                                    'Documentary dislike';
+                                                                KiwiContainer()
+                                                                    .resolve<
+                                                                        DocumentaryLikeDislike>()(DocumentaryParams(
+                                                                    id: prefHelper
+                                                                        .getStringByKey(
+                                                                            'idforgetData',
+                                                                            ''),
+                                                                    type:
+                                                                        'dislike'));
+                                                                setState(() {});
+                                                              },
+                                                              icon: prefHelper
+                                                                          .getStringByKey(
+                                                                              counts,
+                                                                              '')
+                                                                          .toString() ==
+                                                                      'Documentary dislike'
+                                                                  ? const Icon(
+                                                                      Icons
+                                                                          .thumb_down_alt,
+                                                                      color: Colors
+                                                                          .white,
+                                                                    )
+                                                                  : const Icon(
+                                                                      Icons
+                                                                          .thumb_down_alt_outlined,
+                                                                      color: Colors
+                                                                          .white,
+                                                                    )),
+                                                          InkWell(
+                                                            onTap: () async {
+                                                              showDialog(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      ((context) {
+                                                                    return indiator(
+                                                                        Colors
+                                                                            .white);
+                                                                  }));
+
+                                                              Navigator.pop(
+                                                                  context);
+
+                                                              Share.share(
+                                                                  'https://dev.artistreplugged.com/documentary-share/${state.arpViewModel.data!.id.toString()}');
+                                                            },
+                                                            child: Image.asset(
+                                                              'assets/icons/icon_share@3x.png',
+                                                              height: 30,
+                                                              color:
+                                                                  Colors.white,
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Image.network(
+                                                            state.arpViewModel
+                                                                .data!.s3LogoUrl
+                                                                .toString(),
+                                                            height: 40,
+                                                            width: 80,
+                                                            fit: BoxFit.contain,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .symmetric(
+                                                                    horizontal:
+                                                                        15),
+                                                            child: InkWell(
+                                                              onTap: () async {
+                                                                Navigator.of(context).push(
+                                                                    MaterialPageRoute(
+                                                                        fullscreenDialog:
+                                                                            true,
+                                                                        builder: (_) =>
+                                                                            ListentomyMusic(
+                                                                              url: state.arpViewModel.data!.musicUrl.toString(),
+                                                                            )));
+                                                              },
+                                                              child: Container(
+                                                                padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                    horizontal:
+                                                                        8,
+                                                                    vertical:
+                                                                        8),
+                                                                decoration: BoxDecoration(
+                                                                    color: ArtistColor
+                                                                        .buttomBarColor,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            8)),
+                                                                child: Row(
+                                                                  children: [
+                                                                    const Icon(Icons
+                                                                        .headphones),
+                                                                    Text(
+                                                                      '  Listen to my music'
+                                                                          .toUpperCase(),
+                                                                      style: const TextStyle(
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                    )
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
-                                                            Spacer(),
-                                                            Expanded(
-                                                              child: Column(
-                                                                children: [
-                                                                  InkWell(
-                                                                    onTap: () {
-                                                                      count = 1;
-                                                                      context
-                                                                          .read<
-                                                                              ArpbrowserBloc>()
-                                                                          .add(MorelikeThisChaneged(
-                                                                              '',
-                                                                              prefHelper.getStringByKey('genre', '')));
-                                                                      setState(
-                                                                          () {});
-                                                                    },
-                                                                    child:
-                                                                        Container(
-                                                                      height:
-                                                                          40,
-                                                                      alignment:
-                                                                          Alignment
-                                                                              .center,
-                                                                      child: Text(
-                                                                          'More like this',
-                                                                          style: count == 1
-                                                                              ? const TextStyle(
-                                                                                  fontFamily: 'Roboto',
-                                                                                  fontSize: 14,
-                                                                                  fontWeight: FontWeight.w300,
-                                                                                  color: ArtistColor.searchGreyColor,
-                                                                                )
-                                                                              : ArtistTextStyle.smallHeadingTextStyle),
+                                                          )
+                                                        ],
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 7,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          state
+                                                                      .arpViewModel
+                                                                      .data!
+                                                                      .types![
+                                                                          index]
+                                                                      .videoLength
+                                                                      .toString() !=
+                                                                  'null'
+                                                              ? Text(
+                                                                  hrStr,
+                                                                  style: ArtistTextStyle
+                                                                      .smallHeadingTextStyle,
+                                                                )
+                                                              : Container(),
+                                                          Text(
+                                                            ' | ${state.arpViewModel.data!.views!.toInt()} Views',
+                                                            style: ArtistTextStyle
+                                                                .smallHeadingTextStyle,
+                                                          )
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        height: 3,
+                                                      ),
+                                                      Text(
+                                                        prefHelper
+                                                            .getStringByKey(
+                                                                'descriptions',
+                                                                ''),
+                                                        style: ArtistTextStyle
+                                                            .smallHeadingTextStyle,
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 30,
+                                                      ),
+                                                      Column(
+                                                        children: [
+                                                          Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .min,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Column(
+                                                                  children: [
+                                                                    InkWell(
+                                                                      onTap:
+                                                                          () {
+                                                                        setState(
+                                                                            () {
+                                                                          count =
+                                                                              0;
+                                                                        });
+
+                                                                        BlocProvider.of<ArpSelectionBloc>(context).add(GetDataChanged(prefHelper.getStringByKey(
+                                                                            'idforgetData',
+                                                                            '')));
+                                                                      },
+                                                                      child:
+                                                                          Container(
+                                                                        height:
+                                                                            40,
+                                                                        alignment:
+                                                                            Alignment.center,
+                                                                        child: Text(
+                                                                            'Scenes',
+                                                                            style: count == 0
+                                                                                ? const TextStyle(
+                                                                                    fontFamily: 'Roboto',
+                                                                                    fontSize: 14,
+                                                                                    fontWeight: FontWeight.w300,
+                                                                                    color: ArtistColor.searchGreyColor,
+                                                                                  )
+                                                                                : ArtistTextStyle.smallHeadingTextStyle),
+                                                                      ),
                                                                     ),
-                                                                  ),
-                                                                  const SizedBox(
-                                                                    height: 2,
-                                                                  ),
-                                                                  Container(
-                                                                    color: count ==
-                                                                            1
-                                                                        ? Colors
-                                                                            .white
-                                                                        : Colors
-                                                                            .transparent,
-                                                                    height: 2,
-                                                                    width: 85,
-                                                                  ),
-                                                                ],
+                                                                    const SizedBox(
+                                                                      height: 2,
+                                                                    ),
+                                                                    if (count ==
+                                                                        0)
+                                                                      Container(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        height:
+                                                                            2,
+                                                                        width:
+                                                                            60,
+                                                                      )
+                                                                  ],
+                                                                ),
                                                               ),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                )),
-                                          ],
+                                                              Spacer(),
+                                                              Expanded(
+                                                                child: Column(
+                                                                  children: [
+                                                                    InkWell(
+                                                                      onTap:
+                                                                          () {
+                                                                        count =
+                                                                            1;
+                                                                        context.read<ArpbrowserBloc>().add(MorelikeThisChaneged(
+                                                                            '',
+                                                                            prefHelper.getStringByKey('genre',
+                                                                                '')));
+                                                                        setState(
+                                                                            () {});
+                                                                      },
+                                                                      child:
+                                                                          Container(
+                                                                        height:
+                                                                            40,
+                                                                        alignment:
+                                                                            Alignment.center,
+                                                                        child: Text(
+                                                                            'More like this',
+                                                                            style: count == 1
+                                                                                ? const TextStyle(
+                                                                                    fontFamily: 'Roboto',
+                                                                                    fontSize: 14,
+                                                                                    fontWeight: FontWeight.w300,
+                                                                                    color: ArtistColor.searchGreyColor,
+                                                                                  )
+                                                                                : ArtistTextStyle.smallHeadingTextStyle),
+                                                                      ),
+                                                                    ),
+                                                                    const SizedBox(
+                                                                      height: 2,
+                                                                    ),
+                                                                    Container(
+                                                                      color: count == 1
+                                                                          ? Colors
+                                                                              .white
+                                                                          : Colors
+                                                                              .transparent,
+                                                                      height: 2,
+                                                                      width: 85,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  )),
+                                            ],
+                                          ),
                                         )
                                       : Container();
                                 })),
