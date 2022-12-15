@@ -182,7 +182,11 @@ class _ArpMovieSelectionScreenState extends State<ArpMovieSelectionScreen> {
                                                       .views!
                                                       .toInt() +
                                                   1;
-
+                                              prefHelper.saveString(
+                                                  'videoImage',
+                                                  state.arpViewModel.data!
+                                                      .types![index].s3ImageUrl
+                                                      .toString());
                                               Navigator.of(context).push(
                                                   MaterialPageRoute(
                                                       fullscreenDialog: true,
@@ -809,6 +813,14 @@ class _ArpMovieSelectionScreenState extends State<ArpMovieSelectionScreen> {
                                                                             .views!
                                                                             .toInt() +
                                                                         1;
+                                                                    prefHelper.saveString(
+                                                                        'videoImage',
+                                                                        state
+                                                                            .arpViewModel
+                                                                            .data!
+                                                                            .types![index]
+                                                                            .s3ImageUrl
+                                                                            .toString());
                                                                     Navigator.of(context).push(MaterialPageRoute(
                                                                         fullscreenDialog: true,
                                                                         builder: (_) => MyHomePage(

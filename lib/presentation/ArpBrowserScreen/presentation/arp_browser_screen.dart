@@ -444,6 +444,15 @@ class _AppBrowserScreenState extends State<AppBrowserScreen> {
                                                     setState(() {
                                                       exitFull.value = 0;
                                                     });
+                                                    prefHelper.saveString(
+                                                        'videoImage',
+                                                        state
+                                                            .arpBrowserModel
+                                                            .data!
+                                                            .top![current]
+                                                            .types![0]
+                                                            .s3_image_url
+                                                            .toString());
                                                     Navigator.of(context).push(
                                                       MaterialPageRoute(
                                                           fullscreenDialog:

@@ -20,6 +20,7 @@ class MyHomePage extends StatefulWidget {
   final count;
   final String watchId;
   final String type;
+
   const MyHomePage(
       {Key? key,
       required this.videoUrl,
@@ -167,7 +168,16 @@ class _MyHomePageState extends State<MyHomePage>
                           } else {
                             // If the VideoPlayerController is still initializing, show a
                             // loading spinner.
-                            return Center(child: indiator(Colors.white));
+                            return Center(
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: NetworkImage(
+                                              prefHelper.getStringByKey(
+                                                  'videoImage', ''))),
+                                    ),
+                                    child: indiator(Colors.white)));
                           }
                         },
                       ),
