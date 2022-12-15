@@ -14,7 +14,7 @@
 		</data>
 		<key>Headers/video_360-Swift.h</key>
 		<data>
-		l0zyRqfVeUdmwPa5XNBzTNHqcP0=
+		/Exx8O3x/YW0zv9+i7LZ07zP3a8=
 		</data>
 		<key>Headers/video_360-umbrella.h</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		rcgf9Senl4gteMB2+W3Nt3pO9QE=
+		Uh7bF9wDvZBKVLYsm8SuuCt9dvM=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -30,11 +30,11 @@
 		</data>
 		<key>Modules/video_360.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		zo4vNTf4WV+KG1KTQFHUWKaZGvM=
+		nOgPZOQgK+9CNE7c8F5C5OHzMK0=
 		</data>
 		<key>Modules/video_360.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		1XEeZrFiHe69Lqy07cJj3LyH3gM=
+		zoH8bKDUObRb9MBMECPhTnZSbOk=
 		</data>
 		<key>Modules/video_360.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -42,11 +42,11 @@
 		</data>
 		<key>Modules/video_360.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		FrZHVS/boADTxEjk4hhEGLdXEAc=
+		WPhY/B4UVK0NL3MppodbCkUs1F0=
 		</data>
 		<key>Modules/video_360.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		3i7zD7LMaPTiin9tdGhAMFopTiQ=
+		+61uTctqaXC3OSaqItVbc5ULBMg=
 		</data>
 		<key>Modules/video_360.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -54,11 +54,11 @@
 		</data>
 		<key>Modules/video_360.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		q4jt3u1BekBxTM+9TYuqt6YqqzA=
+		2ROaD7xAxRgjV/k2BRR6IuL09M4=
 		</data>
 		<key>Modules/video_360.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		7yUZjCsVEIOV9+9UcPfpsNBG2bE=
+		GPw5wrCBf36Ycr4c/0/iCxw69CE=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -81,7 +81,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			f9fq9I5sR0hNJtsEwXeUYERJm8a3CDzdYA/JQMxDR4Q=
+			FPvOJme/eUQ7w7VIRnCQBUrSg6QfJS/tBM020tXJ3Hc=
 			</data>
 		</dict>
 		<key>Headers/video_360-umbrella.h</key>
@@ -102,14 +102,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			c0GV4+NfkcNNWgbvltiACAAFRGVL8UTLJzPeQ2oxWnE=
+			/9V+PZerPbFYmPfvSPLsG4yAjpxCWPbnV0Sm9capCUw=
 			</data>
 		</dict>
 		<key>Modules/video_360.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			DgulHJU/wXACWutIgLToEdyYUdBjBCq+vS/QWsjJyio=
+			6fiakmo3SNPx27PvLRZUbLzo1KFaOw85m/ExjWxmD1M=
 			</data>
 		</dict>
 		<key>Modules/video_360.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
@@ -123,14 +123,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			RVF92dEndBPYsQWpg4Whd7jOa7UNan1dVmVQV9ypupI=
+			gPZPavGKJ+8smetyorQKXgdsAk4a2hSqnrhsJ2bd4T4=
 			</data>
 		</dict>
 		<key>Modules/video_360.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TtZJ4pcB2J1m32Vw9UybbpB/it3lqUv8oecevST34r8=
+			YM5NwIr2lw7Jv874zPz6eqGzLfWvxOR7QGg7OhFTJnc=
 			</data>
 		</dict>
 		<key>Modules/video_360.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
@@ -144,14 +144,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			C4QYH+kMXr4Ukle9W3ocpULW3pFXDBNmmlt6LB7+tF0=
+			DpQpnnujc+UuShoq97XW9ej/eh+ypP3rA9cALzu+6Wc=
 			</data>
 		</dict>
 		<key>Modules/video_360.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ULb0LP1HZ4w1xefopNTENZeRK9CORUA3mvp8NFbIYf8=
+			+BxaN9Os+y5yfn08l+Y7eqA3vN+I/1tEsb2V+tNisiE=
 			</data>
 		</dict>
 	</dict>

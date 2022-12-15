@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/flutter_to_airplay-Swift.h</key>
 		<data>
-		W/2V8qnIfbAaOJQcd/1josi5wnE=
+		fAqKt589ZVwIsb0RKg0S3nSWbKc=
 		</data>
 		<key>Headers/flutter_to_airplay-umbrella.h</key>
 		<data>
@@ -18,15 +18,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		AyegBLlIU/c3AFDT9CWZIM15eLw=
+		KbgQgRew5fbGCYgvPtSs+67FVz8=
 		</data>
 		<key>Modules/flutter_to_airplay.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		921S6O5jUJrt7O4pLzqrK/T3JEY=
+		LEjn0bb6+EwfVjP0ZvfN8bzE4xI=
 		</data>
 		<key>Modules/flutter_to_airplay.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		NLb2l+r54JGuRZmtey9JxgLMFow=
+		YNSiXQODGFETGOf79sEsAHlWgkA=
 		</data>
 		<key>Modules/flutter_to_airplay.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -34,11 +34,11 @@
 		</data>
 		<key>Modules/flutter_to_airplay.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		47jPrW/U1IqRI3UnTXZcYZJyF5Y=
+		rP/gz63rIj6M7YjhhMVhanLLmfc=
 		</data>
 		<key>Modules/flutter_to_airplay.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		uxqvvdLNPUcU8l3/le8z3A2t4Ug=
+		7Ji/EXGUbIW8JmjTMIrJTYM68rs=
 		</data>
 		<key>Modules/flutter_to_airplay.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -46,11 +46,11 @@
 		</data>
 		<key>Modules/flutter_to_airplay.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		xJCM9fmULT4CjMPG3ISDJ3q6XN8=
+		8gHFb8dCQfx1LyJyn7utnnhoyZ4=
 		</data>
 		<key>Modules/flutter_to_airplay.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		jjwBqgSNr5B3/6/4uenBZWsAWl4=
+		uRcWOhVsMxijB/q8zSqGXgM2kMk=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -70,7 +70,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			TvP8H+cftJRCPgFHVu0YSTd9xCTnALXWaS050ahbp/c=
+			Sio0WmbdVJlrLaUvAvSNndzsVGw9dY9cJjjBMkiecUw=
 			</data>
 		</dict>
 		<key>Headers/flutter_to_airplay-umbrella.h</key>
@@ -84,14 +84,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			1l799rRDtHHPpgdKndgI8Z+Ux6dA0ZfaJCMC9EFnsxw=
+			gOdUEgRXb9Z7ZgL9YYhzGn7pmYYEk0A480sXIdbzXTc=
 			</data>
 		</dict>
 		<key>Modules/flutter_to_airplay.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Jg1MUCqYLJ4Z8QT2i/zJxbY9i8EWSMYbOhOaecO0HRo=
+			sDMHXHi0JYuxT7wFHkB7yGeE7+QD6iq1zgQ6EY62uIg=
 			</data>
 		</dict>
 		<key>Modules/flutter_to_airplay.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
@@ -105,14 +105,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			5zghcp/IL5TrnBo/TbrYD843vj2E4Zm0VhXHXSeRkyg=
+			IGkmsWXJh8SLzSKEgMCdYWH99gmR3YwhQYaszpwrjKA=
 			</data>
 		</dict>
 		<key>Modules/flutter_to_airplay.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			WmY+OeVSIVBGphp3TjZ2XE734hks6NZG0I3g9x02P/8=
+			Gf4Ho7hyHAUgJTwPiRD727vjUxkiIGEfSy1cP9zHe8M=
 			</data>
 		</dict>
 		<key>Modules/flutter_to_airplay.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
@@ -126,14 +126,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			G5RdHyMJYdxk4pdAmYfgaLrBveHeTLUnXqatfohLvns=
+			F7t8z+8NxOxhd5oihvT4UQNiarimXhBR+W4WnzX1FP0=
 			</data>
 		</dict>
 		<key>Modules/flutter_to_airplay.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			afPpV1gNmy9O0tEG9J4+VgfxpRytmvq6Mf6BR6Kg6qk=
+			G80oZxUDOFLGNTVeotcJTtuSyDpMLabSGWxOhhjyvXk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
