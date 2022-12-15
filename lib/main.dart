@@ -17,7 +17,7 @@ var storeUri;
 // pod install --repo-update
 //  arch -x86_64 pod install
 //  sudo arch -x86_64 gem install ffi
-
+//
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
