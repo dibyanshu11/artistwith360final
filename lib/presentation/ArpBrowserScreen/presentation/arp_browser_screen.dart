@@ -81,11 +81,10 @@ class _AppBrowserScreenState extends State<AppBrowserScreen> {
           );
         });
       }
-
-      setState(() {});
     });
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (storeUri != null) {
+
+    if (storeUri != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
         if (storeUri!.endsWith('mp4')) {
           await Navigator.of(context)
               .push(MaterialPageRoute(builder: (_) => ArpQuickClipsScreen()));
@@ -94,10 +93,17 @@ class _AppBrowserScreenState extends State<AppBrowserScreen> {
           Navigator.of(context).push(
               MaterialPageRoute(builder: (_) => ArpMovieSelectionScreen()));
         }
-      }
-    });
+      });
+    }
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    // TODO: implement dispose
+    super.dispose();
   }
   //(MediaQuery.of(context).size.width/4)*3;
   ////final controller = useScrollController();
