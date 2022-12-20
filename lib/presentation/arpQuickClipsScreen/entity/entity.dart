@@ -49,7 +49,7 @@ class _ArpQuickClipsState extends HookState<Widget, ArpQuickClipsState> {
               if (state is Initials) {
                 BlocProvider.of<ClipsBloc>(context).add(const GetData());
               } else if (state is Success) {
-                List.generate(state.quickClipsModel.data!.data!.length,
+                List.generate(state.quickClipsModel.data!.listing!.length,
                     (index) {
                   // url = state.quickClipsModel.data!.data![index].s3_video_url
                   //     .toString();

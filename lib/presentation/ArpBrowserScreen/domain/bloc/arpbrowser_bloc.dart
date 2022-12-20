@@ -57,7 +57,7 @@ class ArpbrowserBloc extends Bloc<ArpbrowserEvent, ArpbrowserState> {
       var failureOrsuccess = await morelikeThisUsecase(value.text);
       if (failureOrsuccess.isRight()) {
         yield MorelikeThisSuccess(
-            failureOrsuccess.getOrElse(() => const Morelikethismodel()));
+            failureOrsuccess.getOrElse(() => Morelikethismodel()));
       }
     }, getSearch: (GetSearch value) async* {
       var failureOrsuccess = await search(unit);

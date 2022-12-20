@@ -343,7 +343,7 @@ class UserRepositoryImp extends UserRepository {
         // Uri.parse(
         //   'https://dev.artistreplugged.com/api/documentary-type?keyword=&type='),
         Uri.parse(
-            '${ArtistConstant.arpBrowserUrl}${text.isEmpty ? texts : text}'),
+            '${ArtistConstant.baseUrl}documentary?page=${pageCountValueDocumentary}&type=${text.isEmpty ? texts : text}'),
         headers: headers,
       );
 
@@ -352,17 +352,16 @@ class UserRepositoryImp extends UserRepository {
       _prefHelper.saveReturnCode(res['returnCode'] ?? 0);
 
       if (_prefHelper.getReturnCode() == 1) {
-        //   var removedIndex = <int>[];
+        for (int i = 0; i <= res['data']["listing"].length - 1; i++) {
+          if (names!.contains(res['data']["listing"][i]['id'])) {
+            log('enter');
+            names!.removeAt(i);
+          }
+        }
 
-        // for (var i = 0; i < res['data']['top'].length; i++) {
-        //   if (res['data']['top'][i]['types'].length == 0) {
-        //     removedIndex.add(i);
-        //   }
-        // }
-
-        // for (var i = 0; i < removedIndex.length; i++) {
-        //   res['data']['top'].removeAt(removedIndex[i]);
-        // }
+        names!.addAll(List<Listing>.from(
+            res['data']["listing"].map((x) => Listing.fromJson(x))));
+        log('names!.length.toString() ${names!.length.toString()}');
 
         return Right(ArpBrowserModel.fromJson(res));
       } else if (_prefHelper.getStringByKey('auth', '').toString() ==
@@ -386,7 +385,7 @@ class UserRepositoryImp extends UserRepository {
         'authorization': 'Bearer ${_prefHelper.getStringByKey('token', '')}'
       };
       final response = await http.get(
-        ArtistConstant.quickClipsUrl,
+        Uri.parse('${ArtistConstant.baseUrl}clips?page=${pageCountValueClips}'),
         headers: headers,
       );
       print(response.body);
@@ -395,6 +394,17 @@ class UserRepositoryImp extends UserRepository {
       _prefHelper.saveReturnCode(res['returnCode'] ?? 0);
 
       if (_prefHelper.getReturnCode() == 1) {
+        for (int i = 0; i <= res['data']["listing"].length - 1; i++) {
+          if (storeQuickClipData.contains(res['data']["listing"][i]['id'])) {
+            log('enter');
+            names!.removeAt(i);
+          }
+        }
+
+        storeQuickClipData.addAll(List<quickListing>.from(
+            res['data']["listing"].map((x) => quickListing.fromJson(x))));
+        log('names!.length.toString() ${names!.length.toString()}');
+
         return Right(QuickClipsModel.fromJson(res));
       } else if (_prefHelper.getStringByKey('auth', '').toString() ==
           'The email has already been taken.') {
@@ -455,16 +465,19 @@ class UserRepositoryImp extends UserRepository {
 
   @override
   Future<Either<Failure, MyListModel>> myListUsecase() async {
+    log(_prefHelper.getStringByKey('token', ''));
     try {
       Map<String, String> headers = <String, String>{
         'authorization': 'Bearer ${_prefHelper.getStringByKey('token', '')}'
       };
       final response = await http
           .get(
-            ArtistConstant.documentaryAddToListUrl,
+            Uri.parse(
+                '${ArtistConstant.baseUrl}documentary-wishlist?page=${pageCountValueList}'),
             headers: headers,
           )
           .timeout(timeOutDurationException);
+
       print(response.body);
 
       var res = jsonDecode(response.body);
@@ -472,6 +485,19 @@ class UserRepositoryImp extends UserRepository {
       _prefHelper.saveReturnCode(res['returnCode'] ?? 0);
 
       if (_prefHelper.getReturnCode() == 1) {
+        for (int i = 0; i <= res['data']["listing"].length - 1; i++) {
+          log(res['data']["listing"][i]['id'].toString());
+          if (getPaginationData.contains(res['data']["listing"][i]['id'])) {
+            log('enter');
+            await getPaginationData.removeAt(i);
+          } else {
+            getPaginationData.addAll(List<myListing>.from(
+                res['data']["listing"].map((x) => myListing.fromJson(x))));
+            log('names!.length.toString() ${names!.length.toString()}');
+            return Right(MyListModel.fromJson(res));
+          }
+        }
+
         return Right(MyListModel.fromJson(res));
       } else if (_prefHelper.getStringByKey('auth', '').toString() ==
           'The email has already been taken.') {
@@ -700,7 +726,7 @@ class UserRepositoryImp extends UserRepository {
       final response = await http
           .get(
             Uri.parse(
-                '${ArtistConstant.moreLikeThisUrl}$text&parent id=${prefHelper.getStringByKey('morelikethis', '')}'),
+                '${ArtistConstant.moreLikeThisUrl}$text&parent id=${prefHelper.getStringByKey('morelikethis', '')}?pag'),
             headers: headers,
           )
           .timeout(timeOutDurationException);
@@ -713,6 +739,18 @@ class UserRepositoryImp extends UserRepository {
       if (_prefHelper.getReturnCode() == 1) {
         await _prefHelper.saveString(
             'documentaryStatus', res['returnMessage'] ?? '');
+        // for (int i = 0; i <= res['data']["listing"].length - 1; i++) {
+        //   log(res['data']["listing"][i]['id'].toString());
+        //   if (storeMoreLikeThisData.contains(res['data']["listing"][i]['id'])) {
+        //     log('enter');
+        //     await storeMoreLikeThisData.removeAt(i);
+        //   }
+        // }
+        // storeMoreLikeThisData.addAll(List<MorelikethismodelListing>.from(
+        //     res['data']["listing"]
+        //         .map((x) => MorelikethismodelListing.fromJson(x))));
+        // log('names!.length.toString() ${names!.length.toString()}');
+
         return Right(Morelikethismodel.fromJson(res));
       } else if (_prefHelper.getStringByKey('auth', '').toString() ==
           'The email has already been taken.') {

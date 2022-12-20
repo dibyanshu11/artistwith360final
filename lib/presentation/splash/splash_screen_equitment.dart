@@ -41,7 +41,11 @@ class _SplashScreenEquitmentState
       } else {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-                builder: (BuildContext context) => const AppBrowserScreen()),
+              builder: (BuildContext context) => const AppBrowserScreen(),
+              // settings: RouteSettings(
+              //   name: 'AppBrowserScreen',
+              // ),
+            ),
             <Route>(Route route) => false);
       }
     });

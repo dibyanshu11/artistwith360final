@@ -2,68 +2,143 @@
 //
 //     final morelikethismodel = morelikethismodelFromJson(jsonString);
 
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'dart:convert';
-part 'morelikethis_model.freezed.dart';
-part 'morelikethis_model.g.dart';
 
-Morelikethismodel morelikethismodelFromJson(String str) => Morelikethismodel.fromJson(json.decode(str));
+Morelikethismodel morelikethismodelFromJson(String str) =>
+    Morelikethismodel.fromJson(json.decode(str));
 
-String morelikethismodelToJson(Morelikethismodel data) => json.encode(data.toJson());
+String morelikethismodelToJson(Morelikethismodel data) =>
+    json.encode(data.toJson());
 
-@freezed
-abstract class Morelikethismodel with _$Morelikethismodel {
-    const factory Morelikethismodel({
-        int? returnCode,
-        Data? data,
-        String? returnMessage,
-    }) = _Morelikethismodel;
+class Morelikethismodel {
+  Morelikethismodel({
+    this.returnCode,
+    this.data,
+    this.returnMessage,
+  });
 
-    factory Morelikethismodel.fromJson(Map<String, dynamic> json) => _$MorelikethismodelFromJson(json);
+  int? returnCode;
+  List<Datum>? data;
+  String? returnMessage;
+
+  factory Morelikethismodel.fromJson(Map<String, dynamic> json) =>
+      Morelikethismodel(
+        returnCode: json["returnCode"],
+        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        returnMessage: json["returnMessage"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "returnCode": returnCode,
+        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
+        "returnMessage": returnMessage,
+      };
 }
 
-@freezed
-abstract class Data with _$Data {
-    const factory Data({
-        List<Datum>? data,
-        int? total,
-    }) = _Data;
+class Datum {
+  Datum({
+    this.id,
+    this.title,
+    this.city,
+    this.state,
+    this.logo,
+    this.releaseDate,
+    this.genre,
+    this.musicUrl,
+    this.s3ImageUrl,
+    this.s3VideoUrl,
+    this.s3LogoUrl,
+    this.trailer,
+  });
 
-    factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
+  int? id;
+  String? title;
+  String? city;
+  String? state;
+  String? logo;
+  DateTime? releaseDate;
+  String? genre;
+  String? musicUrl;
+  String? s3ImageUrl;
+  String? s3VideoUrl;
+  String? s3LogoUrl;
+  Trailer? trailer;
+
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+        id: json["id"],
+        title: json["title"],
+        city: json["city"],
+        state: json["state"],
+        logo: json["logo"],
+        releaseDate: DateTime.parse(json["release_date"]),
+        genre: json["genre"],
+        musicUrl: json["music_url"],
+        s3ImageUrl: json["s3_image_url"],
+        s3VideoUrl: json["s3_video_url"],
+        s3LogoUrl: json["s3_logo_url"],
+        trailer: Trailer.fromJson(json["trailer"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "title": title,
+        "city": city,
+        "state": state,
+        "logo": logo,
+        "release_date": releaseDate!.toIso8601String(),
+        "genre": genre,
+        "music_url": musicUrl,
+        "s3_image_url": s3ImageUrl,
+        "s3_video_url": s3VideoUrl,
+        "s3_logo_url": s3LogoUrl,
+        "trailer": trailer!.toJson(),
+      };
 }
 
-@freezed
-abstract class Datum with _$Datum {
-    const factory Datum({
-        int? id,
-        String? title,
-        String? city,
-        String? state,
-        String? logo,
-        DateTime? releaseDate,
-        String? genre,
-        dynamic video,
-        String? s3_image_url,
-        String? s3_video_url,
-        String? s3_logo_url,
-        Trailer? trailer,
-    }) = _Datum;
+class Trailer {
+  Trailer({
+    this.id,
+    this.type,
+    this.documentaryId,
+    this.image,
+    this.video,
+    this.description,
+    this.videoLength,
+    this.s3ImageUrl,
+    this.s3VideoUrl,
+  });
 
-    factory Datum.fromJson(Map<String, dynamic> json) => _$DatumFromJson(json);
-}
+  int? id;
+  String? type;
+  int? documentaryId;
+  String? image;
+  String? video;
+  String? description;
+  String? videoLength;
+  String? s3ImageUrl;
+  String? s3VideoUrl;
 
-@freezed
-abstract class Trailer with _$Trailer {
-    const factory Trailer({
-        int? id,
-        String? type,
-        int? documentaryId,
-        String? image,
-        String? video,
-        String? description,
-        String? s3_image_url,
-        String? s3_video_url,
-    }) = _Trailer;
+  factory Trailer.fromJson(Map<String, dynamic> json) => Trailer(
+        id: json["id"],
+        type: json["type"],
+        documentaryId: json["documentary_id"],
+        image: json["image"],
+        video: json["video"],
+        description: json["description"],
+        videoLength: json["video_length"],
+        s3ImageUrl: json["s3_image_url"],
+        s3VideoUrl: json["s3_video_url"],
+      );
 
-    factory Trailer.fromJson(Map<String, dynamic> json) => _$TrailerFromJson(json);
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "type": type,
+        "documentary_id": documentaryId,
+        "image": image,
+        "video": video,
+        "description": description,
+        "video_length": videoLength,
+        "s3_image_url": s3ImageUrl,
+        "s3_video_url": s3VideoUrl,
+      };
 }

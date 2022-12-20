@@ -17,24 +17,53 @@ class ArpSearchModel {
   });
 
   int? returnCode;
-  List<Datum>? data;
+  Data? data;
   String? returnMessage;
 
   factory ArpSearchModel.fromJson(Map<String, dynamic> json) => ArpSearchModel(
         returnCode: json["returnCode"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        data: Data.fromJson(json["data"]),
         returnMessage: json["returnMessage"],
       );
 
   Map<String, dynamic> toJson() => {
         "returnCode": returnCode,
-        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
+        "data": data!.toJson(),
         "returnMessage": returnMessage,
       };
 }
 
-class Datum {
-  Datum({
+class Data {
+  Data({
+    this.listing,
+    this.total,
+    this.lastPage,
+    this.currentPage,
+  });
+
+  List<ArpSearchModelListing>? listing;
+  int? total;
+  int? lastPage;
+  int? currentPage;
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+        listing: List<ArpSearchModelListing>.from(
+            json["listing"].map((x) => ArpSearchModelListing.fromJson(x))),
+        total: json["total"],
+        lastPage: json["last_page"],
+        currentPage: json["current_page"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "listing": List<dynamic>.from(listing!.map((x) => x.toJson())),
+        "total": total,
+        "last_page": lastPage,
+        "current_page": currentPage,
+      };
+}
+
+class ArpSearchModelListing {
+  ArpSearchModelListing({
     this.id,
     this.title,
     this.city,
@@ -62,7 +91,8 @@ class Datum {
   String? s3LogoUrl;
   Trailer? trailer;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory ArpSearchModelListing.fromJson(Map<String, dynamic> json) =>
+      ArpSearchModelListing(
         id: json["id"],
         title: json["title"],
         city: json["city"],

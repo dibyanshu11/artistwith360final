@@ -1,0 +1,72 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_$_CommentModel _$$_CommentModelFromJson(Map<String, dynamic> json) =>
+    _$_CommentModel(
+      returnCode: json['returnCode'] as int?,
+      data: json['data'] == null
+          ? null
+          : Data.fromJson(json['data'] as Map<String, dynamic>),
+      returnMessage: json['returnMessage'] as String?,
+    );
+
+Map<String, dynamic> _$$_CommentModelToJson(_$_CommentModel instance) =>
+    <String, dynamic>{
+      'returnCode': instance.returnCode,
+      'data': instance.data,
+      'returnMessage': instance.returnMessage,
+    };
+
+_$_Data _$$_DataFromJson(Map<String, dynamic> json) => _$_Data(
+      id: json['id'] as int?,
+      title: json['title'] as String?,
+      videoUrl: json['videoUrl'] as String?,
+      image: json['image'] as String?,
+      views: json['views'] as int?,
+      likes: json['likes'] as int?,
+      releaseDate: json['releaseDate'] == null
+          ? null
+          : DateTime.parse(json['releaseDate'] as String),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      s3ImageUrl: json['s3ImageUrl'] as String?,
+      s3VideoUrl: json['s3VideoUrl'] as String?,
+      comments: (json['comments'] as List<dynamic>?)
+          ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$_DataToJson(_$_Data instance) => <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'videoUrl': instance.videoUrl,
+      'image': instance.image,
+      'views': instance.views,
+      'likes': instance.likes,
+      'releaseDate': instance.releaseDate?.toIso8601String(),
+      'createdAt': instance.createdAt?.toIso8601String(),
+      's3ImageUrl': instance.s3ImageUrl,
+      's3VideoUrl': instance.s3VideoUrl,
+      'comments': instance.comments,
+    };
+
+_$_Comment _$$_CommentFromJson(Map<String, dynamic> json) => _$_Comment(
+      id: json['id'] as int?,
+      clipId: json['clipId'] as int?,
+      userId: json['userId'] as int?,
+      comment: json['comment'] as String?,
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+    );
+
+Map<String, dynamic> _$$_CommentToJson(_$_Comment instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'clipId': instance.clipId,
+      'userId': instance.userId,
+      'comment': instance.comment,
+      'createdAt': instance.createdAt?.toIso8601String(),
+    };

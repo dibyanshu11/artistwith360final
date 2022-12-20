@@ -249,7 +249,9 @@ class _SearchList2State extends State<SearchList2> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              state.arpSearchModel.data!.length.toInt() != 0
+                              state.arpSearchModel.data!.listing!.length
+                                          .toInt() !=
+                                      0
                                   ? GridView.builder(
                                       shrinkWrap: true,
                                       physics: const ScrollPhysics(),
@@ -259,8 +261,8 @@ class _SearchList2State extends State<SearchList2> {
                                               mainAxisExtent: 300,
                                               crossAxisSpacing: 40,
                                               mainAxisSpacing: 0),
-                                      itemCount:
-                                          state.arpSearchModel.data!.length,
+                                      itemCount: state
+                                          .arpSearchModel.data!.listing!.length,
                                       itemBuilder: (BuildContext ctx, index) {
                                         return InkWell(
                                           focusColor: Colors.transparent,
@@ -268,8 +270,8 @@ class _SearchList2State extends State<SearchList2> {
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
                                             setState(() {
-                                              types = state.arpSearchModel
-                                                  .data![index].trailer!.type
+                                              types = state.arpSearchModel.data!
+                                                  .listing![index].trailer!.type
                                                   .toString();
                                               storeText = widget.text;
                                             });
@@ -278,7 +280,8 @@ class _SearchList2State extends State<SearchList2> {
                                                 'descriptions',
                                                 state
                                                     .arpSearchModel
-                                                    .data![index]
+                                                    .data!
+                                                    .listing![index]
                                                     .trailer!
                                                     .description
                                                     .toString());
@@ -286,7 +289,8 @@ class _SearchList2State extends State<SearchList2> {
                                                 'idforgetData',
                                                 state
                                                     .arpSearchModel
-                                                    .data![index]
+                                                    .data!
+                                                    .listing![index]
                                                     .trailer!
                                                     .documentaryId
                                                     .toString());
@@ -308,7 +312,8 @@ class _SearchList2State extends State<SearchList2> {
                                                   child: CachedNetworkImage(
                                                     imageUrl: (state
                                                         .arpSearchModel
-                                                        .data![index]
+                                                        .data!
+                                                        .listing![index]
                                                         .trailer!
                                                         .s3ImageUrl
                                                         .toString()),
@@ -333,7 +338,8 @@ class _SearchList2State extends State<SearchList2> {
                                                   CachedNetworkImage(
                                                     imageUrl: (state
                                                         .arpSearchModel
-                                                        .data![index]
+                                                        .data!
+                                                        .listing![index]
                                                         .s3LogoUrl
                                                         .toString()),
                                                     height: 40,
@@ -348,7 +354,7 @@ class _SearchList2State extends State<SearchList2> {
                                                     height: 5,
                                                   ),
                                                   Text(
-                                                    '${state.arpSearchModel.data![index].city.toString()}, ${state.arpSearchModel.data![index].state.toString()} - ${state.arpSearchModel.data![index].genre.toString()}',
+                                                    '${state.arpSearchModel.data!.listing![index].city.toString()}, ${state.arpSearchModel.data!.listing![index].state.toString()} - ${state.arpSearchModel.data!.listing![index].genre.toString()}',
                                                     style: ArtistTextStyle
                                                         .smallHeadingTextStyle,
                                                   )

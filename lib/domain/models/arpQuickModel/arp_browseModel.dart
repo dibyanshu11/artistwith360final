@@ -1,13 +1,13 @@
 // To parse this JSON data, do
 //
-//     final ArpBrowserModel = ArpBrowserModelFromJson(jsonString);
+//     final arpBrowserModel = arpBrowserModelFromJson(jsonString);
 
 import 'dart:convert';
 
-ArpBrowserModel ArpBrowserModelFromJson(String str) =>
+ArpBrowserModel arpBrowserModelFromJson(String str) =>
     ArpBrowserModel.fromJson(json.decode(str));
 
-String ArpBrowserModelToJson(ArpBrowserModel data) =>
+String arpBrowserModelToJson(ArpBrowserModel data) =>
     json.encode(data.toJson());
 
 class ArpBrowserModel {
@@ -37,135 +37,55 @@ class ArpBrowserModel {
 
 class Data {
   Data({
-    this.trendingList,
+    this.listing,
     this.total,
+    this.lastPage,
+    this.currentPage,
     this.top,
   });
 
-  List<TrendingList>? trendingList;
+  List<Listing>? listing;
   int? total;
+  int? lastPage;
+  int? currentPage;
   List<Top>? top;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        trendingList: List<TrendingList>.from(
-            json["trending_list"].map((x) => TrendingList.fromJson(x))),
+        listing:
+            List<Listing>.from(json["listing"].map((x) => Listing.fromJson(x))),
         total: json["total"],
+        lastPage: json["last_page"],
+        currentPage: json["current_page"],
         top: List<Top>.from(json["top"].map((x) => Top.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "trending_list":
-            List<dynamic>.from(trendingList!.map((x) => x.toJson())),
+        "listing": List<dynamic>.from(listing!.map((x) => x.toJson())),
         "total": total,
+        "last_page": lastPage,
+        "current_page": currentPage,
         "top": List<dynamic>.from(top!.map((x) => x.toJson())),
       };
 }
 
-class Top {
-  Top({
+class Listing {
+  Listing({
     this.id,
     this.title,
+    this.city,
+    this.state,
     this.logo,
-    this.s3_image_url,
-    this.s3_video_url,
-    this.s3_logo_url,
-    this.types,
+    this.releaseDate,
+    this.genre,
+    this.musicUrl,
+    this.views,
+    this.s3ImageUrl,
+    this.s3VideoUrl,
+    this.s3LogoUrl,
+    this.trailer,
+    this.listed,
+    this.liked,
   });
-
-  int? id;
-  String? title;
-  String? logo;
-  String? s3_image_url;
-  String? s3_video_url;
-  String? s3_logo_url;
-  List<Type>? types;
-
-  factory Top.fromJson(Map<String, dynamic> json) => Top(
-        id: json["id"],
-        title: json["title"],
-        logo: json["logo"],
-        s3_image_url: json["s3_image_url"],
-        s3_video_url: json["s3_video_url"],
-        s3_logo_url: json["s3_logo_url"],
-        types: List<Type>.from(json["types"].map((x) => Type.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
-        "logo": logo,
-        "s3_image_url": s3_image_url,
-        "s3_video_url": s3_video_url,
-        "s3_logo_url": s3_logo_url,
-        "types": List<dynamic>.from(types!.map((x) => x.toJson())),
-      };
-}
-
-class Type {
-  Type({
-    this.id,
-    this.type,
-    this.documentaryId,
-    this.image,
-    this.video,
-    this.s3_image_url,
-    this.s3_video_url,
-    this.video_length,
-    this.description,
-  });
-
-  int? id;
-  String? type;
-  String? video_length;
-  int? documentaryId;
-  String? image;
-  String? video;
-  String? s3_image_url;
-  String? s3_video_url;
-  String? description;
-
-  factory Type.fromJson(Map<String, dynamic> json) => Type(
-        id: json["id"],
-        type: json["type"],
-        documentaryId: json["documentary_id"],
-        video_length: json["video_length"],
-        image: json["image"],
-        video: json["video"],
-        s3_image_url: json["s3_image_url"],
-        s3_video_url: json["s3_video_url"],
-        description: json["description"] ?? null,
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "type": type,
-        "documentary_id": documentaryId,
-        "image": image,
-        "video": video,
-        "video_length": video_length,
-        "s3_image_url": s3_image_url,
-        "s3_video_url": s3_video_url,
-        "description": description ?? null,
-      };
-}
-
-class TrendingList {
-  TrendingList(
-      {this.id,
-      this.title,
-      this.city,
-      this.state,
-      this.logo,
-      this.releaseDate,
-      this.genre,
-      this.video,
-      this.s3_image_url,
-      this.s3_video_url,
-      this.s3_logo_url,
-      this.trailer,
-      this.listed,
-      this.views,
-      this.liked});
 
   int? id;
   String? title;
@@ -174,48 +94,139 @@ class TrendingList {
   String? logo;
   DateTime? releaseDate;
   String? genre;
-  dynamic video;
-  String? s3_image_url;
-  String? s3_video_url;
-  String? s3_logo_url;
-  Type? trailer;
-  int? listed;
+  String? musicUrl;
   int? views;
+  String? s3ImageUrl;
+  String? s3VideoUrl;
+  String? s3LogoUrl;
+  Trailer? trailer;
+  int? listed;
   int? liked;
 
-  factory TrendingList.fromJson(Map<String, dynamic> json) => TrendingList(
-      id: json["id"],
-      title: json["title"],
-      city: json["city"],
-      views: json["views"],
-      state: json["state"],
-      logo: json["logo"],
-      releaseDate: DateTime.parse(json["release_date"]),
-      genre: json["genre"],
-      video: json["video"],
-      s3_image_url: json["s3_image_url"],
-      s3_video_url: json["s3_video_url"],
-      s3_logo_url: json["s3_logo_url"],
-      trailer: json["trailer"] == null ? null : Type.fromJson(json["trailer"]),
-      listed: json["listed"],
-      liked: json["liked"]);
+  factory Listing.fromJson(Map<String, dynamic> json) => Listing(
+        id: json["id"],
+        title: json["title"],
+        city: json["city"],
+        state: json["state"],
+        logo: json["logo"],
+        releaseDate: DateTime.parse(json["release_date"]),
+        genre: json["genre"],
+        musicUrl: json["music_url"],
+        views: json["views"],
+        s3ImageUrl: json["s3_image_url"],
+        s3VideoUrl: json["s3_video_url"],
+        s3LogoUrl: json["s3_logo_url"],
+        trailer: Trailer.fromJson(json["trailer"]),
+        listed: json["listed"],
+        liked: json["liked"],
+      );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
-        "liked": liked,
         "city": city,
-        "views": views,
         "state": state,
         "logo": logo,
-        "release_date":
-            "${releaseDate!.year.toString().padLeft(4, '0')}-${releaseDate!.month.toString().padLeft(2, '0')}-${releaseDate!.day.toString().padLeft(2, '0')}",
+        "release_date": releaseDate!.toIso8601String(),
         "genre": genre,
-        "video": video,
-        "s3_image_url": s3_image_url,
-        "s3_video_url": s3_video_url,
-        "s3_logo_url": s3_logo_url,
-        "trailer": trailer == null ? null : trailer!.toJson(),
+        "music_url": musicUrl,
+        "views": views,
+        "s3_image_url": s3ImageUrl,
+        "s3_video_url": s3VideoUrl,
+        "s3_logo_url": s3LogoUrl,
+        "trailer": trailer!.toJson(),
         "listed": listed,
+        "liked": liked,
       };
 }
+
+class Trailer {
+  Trailer({
+    this.id,
+    this.type,
+    this.documentaryId,
+    this.image,
+    this.video,
+    this.description,
+    this.videoLength,
+    this.s3ImageUrl,
+    this.s3VideoUrl,
+  });
+
+  int? id;
+  String? type;
+  int? documentaryId;
+  String? image;
+  String? video;
+  String? description;
+  String? videoLength;
+  String? s3ImageUrl;
+  String? s3VideoUrl;
+
+  factory Trailer.fromJson(Map<String, dynamic> json) => Trailer(
+        id: json["id"],
+        type: json["type"],
+        documentaryId: json["documentary_id"],
+        image: json["image"],
+        video: json["video"],
+        description: json["description"] == null ? null : json["description"],
+        videoLength: json["video_length"],
+        s3ImageUrl: json["s3_image_url"],
+        s3VideoUrl: json["s3_video_url"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "type": type,
+        "documentary_id": documentaryId,
+        "image": image,
+        "video": video,
+        "description": description == null ? null : description,
+        "video_length": videoLength,
+        "s3_image_url": s3ImageUrl,
+        "s3_video_url": s3VideoUrl,
+      };
+}
+
+class Top {
+  Top({
+    this.id,
+    this.title,
+    this.logo,
+    this.s3ImageUrl,
+    this.s3VideoUrl,
+    this.s3LogoUrl,
+    this.types,
+  });
+
+  int? id;
+  String? title;
+  String? logo;
+  String? s3ImageUrl;
+  String? s3VideoUrl;
+  String? s3LogoUrl;
+  List<Trailer>? types;
+
+  factory Top.fromJson(Map<String, dynamic> json) => Top(
+        id: json["id"],
+        title: json["title"],
+        logo: json["logo"],
+        s3ImageUrl: json["s3_image_url"],
+        s3VideoUrl: json["s3_video_url"],
+        s3LogoUrl: json["s3_logo_url"],
+        types:
+            List<Trailer>.from(json["types"].map((x) => Trailer.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "title": title,
+        "logo": logo,
+        "s3_image_url": s3ImageUrl,
+        "s3_video_url": s3VideoUrl,
+        "s3_logo_url": s3LogoUrl,
+        "types": List<dynamic>.from(types!.map((x) => x.toJson())),
+      };
+}
+
+List<Listing>? names = [];

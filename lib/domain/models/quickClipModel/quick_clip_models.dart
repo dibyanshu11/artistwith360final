@@ -37,26 +37,37 @@ class QuickClipsModel {
 
 class Data {
   Data({
-    this.data,
+    this.listing,
     this.total,
+    this.lastPage,
+    this.currentPage,
   });
 
-  final List<Datum>? data;
+  List<quickListing>? listing;
   int? total;
+  int? lastPage;
+  int? currentPage;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        listing: List<quickListing>.from(
+            json["listing"].map((x) => quickListing.fromJson(x))),
         total: json["total"],
+        lastPage: json["last_page"],
+        currentPage: json["current_page"],
       );
 
   Map<String, dynamic> toJson() => {
-        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
+        "listing": List<dynamic>.from(listing!.map((x) => x.toJson())),
         "total": total,
+        "last_page": lastPage,
+        "current_page": currentPage,
       };
 }
 
-class Datum {
-  Datum({
+List<quickListing> storeQuickClipData = [];
+
+class quickListing {
+  quickListing({
     this.id,
     this.title,
     this.videoUrl,
@@ -88,7 +99,7 @@ class Datum {
   int? count;
   int? liked;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory quickListing.fromJson(Map<String, dynamic> json) => quickListing(
         id: json["id"],
         title: json["title"],
         videoUrl: json["video_url"],

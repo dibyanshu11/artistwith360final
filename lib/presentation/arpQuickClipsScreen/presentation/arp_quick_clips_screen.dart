@@ -6,6 +6,9 @@ import 'package:kiwi/kiwi.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../core/theme/text_style.dart';
 import '../../../data/local/shared_pref.dart';
+import '../../../domain/models/quickClipModel/quick_clip_models.dart';
+import '../../../domain/user_repository.dart';
+import '../../ArpBrowserScreen/presentation/arp_browser_screen.dart';
 import '../../video/arp_video_play.dart';
 import '../domain/bloc/clips_bloc.dart';
 import 'dart:math' as math;
@@ -31,11 +34,13 @@ class _ArpQuickClipsScreenState extends State<ArpQuickClipsScreen> {
 
   TextEditingController controller = TextEditingController();
   var count = 0;
-  late PageController _controller;
+  PageController _controller = PageController();
   var retainData;
-
+  UserRepository repository = KiwiContainer().resolve<UserRepository>();
   @override
   initState() {
+    pageCountValueClips = 1;
+    storeQuickClipData.removeRange(0, storeQuickClipData.length);
     if (storeUri != null) {
       setState(() {
         if (storeUri != null) {
@@ -57,7 +62,21 @@ class _ArpQuickClipsScreenState extends State<ArpQuickClipsScreen> {
     try {
       _controller = PageController(
           initialPage: storeUri != null ? int.parse(retainData[5]) : 0);
-      // });
+      _controller.addListener(() {
+        if (_controller.position.maxScrollExtent == _controller.offset) {
+          ;
+
+          setState(() {
+            setState(() {
+              // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              //     backgroundColor: Colors.transparent,
+              //     content: indiator(Colors.white)));
+              pageCountValueClips++;
+            });
+            repository.quick();
+          });
+        }
+      });
     } catch (e) {
       _controller = PageController(initialPage: 0);
     }
@@ -96,9 +115,7 @@ class _ArpQuickClipsScreenState extends State<ArpQuickClipsScreen> {
                           onVerticalDragEnd: (text) {
                             Navigator.pop(context);
                           },
-                          child: (state.quickClipsModel.data!.data!.length
-                                      .toInt() >
-                                  0)
+                          child: (storeQuickClipData.length.toInt() > 0)
                               ? PageView.builder(
                                   controller: _controller,
                                   onPageChanged: (index) {
@@ -106,26 +123,22 @@ class _ArpQuickClipsScreenState extends State<ArpQuickClipsScreen> {
                                       count = 0;
 
                                       prefHelper.saveInt(
-                                          state.quickClipsModel.data!.data!
-                                              .reversed
+                                          storeQuickClipData.reversed
                                               .toList()[index]
                                               .id
                                               .toString(),
-                                          state.quickClipsModel.data!.data!
-                                              .reversed
+                                          storeQuickClipData.reversed
                                               .toList()[index]
                                               .likes!
                                               .toInt());
                                     });
-                                    if (state.quickClipsModel.data!.data!
-                                            .reversed
+                                    if (storeQuickClipData.reversed
                                             .toList()[index]
                                             .liked ==
                                         0) {
                                       KiwiContainer().resolve<QuickView>()(
                                           LikeCommentParams(
-                                              id: state.quickClipsModel.data!
-                                                  .data!.reversed
+                                              id: storeQuickClipData.reversed
                                                   .toList()[index]
                                                   .id!
                                                   .toInt(),
@@ -133,18 +146,15 @@ class _ArpQuickClipsScreenState extends State<ArpQuickClipsScreen> {
                                     }
                                   },
                                   scrollDirection: Axis.horizontal,
-                                  itemCount:
-                                      state.quickClipsModel.data!.data!.length,
+                                  itemCount: storeQuickClipData.length,
                                   itemBuilder: (context, index) {
                                     if (count == 0) {
                                       prefHelper.saveInt(
-                                          state.quickClipsModel.data!.data!
-                                              .reversed
+                                          storeQuickClipData.reversed
                                               .toList()[index]
                                               .id
                                               .toString(),
-                                          state.quickClipsModel.data!.data!
-                                              .reversed
+                                          storeQuickClipData.reversed
                                               .toList()[index]
                                               .likes!
                                               .toInt());
@@ -168,8 +178,8 @@ class _ArpQuickClipsScreenState extends State<ArpQuickClipsScreen> {
                                                 .size
                                                 .height,
                                             child: QuikClipsPlayer(
-                                              videoUrl: state.quickClipsModel
-                                                  .data!.data!.reversed
+                                              videoUrl: storeQuickClipData
+                                                  .reversed
                                                   .toList()[index]
                                                   .s3VideoUrl
                                                   .toString(),
@@ -202,10 +212,7 @@ class _ArpQuickClipsScreenState extends State<ArpQuickClipsScreen> {
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                              state
-                                                                  .quickClipsModel
-                                                                  .data!
-                                                                  .data!
+                                                              storeQuickClipData
                                                                   .reversed
                                                                   .toList()[
                                                                       index]
@@ -244,34 +251,22 @@ class _ArpQuickClipsScreenState extends State<ArpQuickClipsScreen> {
                                                     InkWell(
                                                       onTap: () {
                                                         setState(() {
-                                                          if (state
-                                                                  .quickClipsModel
-                                                                  .data!
-                                                                  .data!
+                                                          if (storeQuickClipData
                                                                   .reversed
                                                                   .toList()[
                                                                       index]
                                                                   .liked ==
                                                               0) {
-                                                            state
-                                                                .quickClipsModel
-                                                                .data!
-                                                                .data!
+                                                            storeQuickClipData
                                                                 .reversed
                                                                 .toList()[index]
-                                                                .likes = state
-                                                                    .quickClipsModel
-                                                                    .data!
-                                                                    .data!
+                                                                .likes = storeQuickClipData
                                                                     .reversed
                                                                     .toList()[
                                                                         index]
                                                                     .likes! +
                                                                 1;
-                                                            state
-                                                                .quickClipsModel
-                                                                .data!
-                                                                .data!
+                                                            storeQuickClipData
                                                                 .reversed
                                                                 .toList()[index]
                                                                 .liked = 1;
@@ -279,10 +274,7 @@ class _ArpQuickClipsScreenState extends State<ArpQuickClipsScreen> {
                                                                         ClipsBloc>(
                                                                     context)
                                                                 .add(ClipsLikeChangged(
-                                                                    state
-                                                                        .quickClipsModel
-                                                                        .data!
-                                                                        .data!
+                                                                    storeQuickClipData
                                                                         .reversed
                                                                         .toList()[
                                                                             index]
@@ -290,25 +282,16 @@ class _ArpQuickClipsScreenState extends State<ArpQuickClipsScreen> {
                                                                         .toInt(),
                                                                     'add'));
                                                           } else {
-                                                            state
-                                                                .quickClipsModel
-                                                                .data!
-                                                                .data!
+                                                            storeQuickClipData
                                                                 .reversed
                                                                 .toList()[index]
-                                                                .likes = state
-                                                                    .quickClipsModel
-                                                                    .data!
-                                                                    .data!
+                                                                .likes = storeQuickClipData
                                                                     .reversed
                                                                     .toList()[
                                                                         index]
                                                                     .likes! -
                                                                 1;
-                                                            state
-                                                                .quickClipsModel
-                                                                .data!
-                                                                .data!
+                                                            storeQuickClipData
                                                                 .reversed
                                                                 .toList()[index]
                                                                 .liked = 0;
@@ -316,10 +299,7 @@ class _ArpQuickClipsScreenState extends State<ArpQuickClipsScreen> {
                                                                         ClipsBloc>(
                                                                     context)
                                                                 .add(ClipsLikeChangged(
-                                                                    state
-                                                                        .quickClipsModel
-                                                                        .data!
-                                                                        .data!
+                                                                    storeQuickClipData
                                                                         .reversed
                                                                         .toList()[
                                                                             index]
@@ -345,10 +325,7 @@ class _ArpQuickClipsScreenState extends State<ArpQuickClipsScreen> {
                                                             ),
                                                             Text(
                                                                 '${numberFormat(
-                                                                  state
-                                                                      .quickClipsModel
-                                                                      .data!
-                                                                      .data!
+                                                                  storeQuickClipData
                                                                       .reversed
                                                                       .toList()[
                                                                           index]
@@ -382,7 +359,7 @@ class _ArpQuickClipsScreenState extends State<ArpQuickClipsScreen> {
                                                             ),
                                                           ),
                                                           Text(
-                                                              '${numberFormat(state.quickClipsModel.data!.data!.reversed.toList()[index].views!.toInt())}',
+                                                              '${numberFormat(storeQuickClipData.reversed.toList()[index].views!.toInt())}',
                                                               style: const TextStyle(
                                                                   color: Colors
                                                                       .white))

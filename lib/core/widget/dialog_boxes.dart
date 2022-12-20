@@ -1,15 +1,16 @@
 import 'dart:io';
-import 'package:artist_replugged/presentation/ArpBrowserScreen/presentation/arp_browser_screen.dart';
 import 'package:artist_replugged/presentation/arpQuickClipsScreen/presentation/arp_quick_clips_screen.dart';
 import 'package:artist_replugged/presentation/search/presentation/search_filter.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../presentation/ArpBrowserScreen/presentation/arp_browser_screen.dart';
 import '../../presentation/setting/setting.dart';
 import '../theme/colors.dart';
 import '../theme/text_style.dart';
 
+List route = [0];
 showDialoges(BuildContext context, String text) {
   return showDialog(
     context: context,
@@ -149,7 +150,7 @@ buttonbar(currentIndex, BuildContext context, {bool? status}) {
     showSelectedLabels: true,
     showUnselectedLabels: true,
     currentIndex: currentIndex,
-    onTap: (index) {
+    onTap: (index) async {
       //  currentIndex = index;
       if (currentIndex != index) {
         status = false;
@@ -159,25 +160,39 @@ buttonbar(currentIndex, BuildContext context, {bool? status}) {
       ///
       switch (index) {
         case 0:
-          // if (status == false) {
-          Navigator.of(context).push(MaterialPageRoute(
-              fullscreenDialog: true,
-              builder: (_) => const AppBrowserScreen()));
-          // }
+          // if (route0 == 1) {
+          //   Navigator.of(context).popUntil((route) {
+          //     return route.settings.name == 'AppBrowserScreen';
+          //   });
+          // } else {
 
+          Navigator.of(context).push(MaterialPageRoute(
+              fullscreenDialog: true, builder: (_) => AppBrowserScreen()));
+          // }
           break;
         case 1:
           if (status == false) {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (_) => const ArpQuickClipsScreen(),
-                fullscreenDialog: true));
+            ;
+
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                  builder: (_) => const ArpQuickClipsScreen(),
+                  settings: RouteSettings(name: 'ArpQuickClipsScreen'),
+                  fullscreenDialog: true),
+            );
           }
+
           break;
         case 2:
           if (status == false) {
             Navigator.of(context).push(MaterialPageRoute(
-                fullscreenDialog: true, builder: (_) => const SearchScreen()));
+                fullscreenDialog: true,
+                // settings: RouteSettings(
+                //   name: 'SearchScreen',
+                // ),
+                builder: (_) => const SearchScreen()));
           }
+          //   }
           break;
 
         case 3:

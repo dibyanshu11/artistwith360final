@@ -1022,7 +1022,7 @@ class _ArpMovieSelectionScreenState extends State<ArpMovieSelectionScreen> {
                                   ? MediaQuery.removePadding(
                                       context: context,
                                       removeTop: true,
-                                      child: state.morelikethismodel.data!.data!
+                                      child: state.morelikethismodel.data!
                                                   .length
                                                   .toInt() >
                                               0
@@ -1032,11 +1032,11 @@ class _ArpMovieSelectionScreenState extends State<ArpMovieSelectionScreen> {
                                               gridDelegate:
                                                   const SliverGridDelegateWithMaxCrossAxisExtent(
                                                       maxCrossAxisExtent: 180,
-                                                      mainAxisExtent: 340,
+                                                      mainAxisExtent: 270,
                                                       crossAxisSpacing: 20,
-                                                      mainAxisSpacing: 10),
+                                                      mainAxisSpacing: 0),
                                               itemCount: state.morelikethismodel
-                                                  .data!.data!.length,
+                                                  .data!.length,
                                               itemBuilder:
                                                   (BuildContext ctx, index) {
                                                 // prefHelper
@@ -1061,7 +1061,6 @@ class _ArpMovieSelectionScreenState extends State<ArpMovieSelectionScreen> {
                                                             'descriptions',
                                                             state
                                                                 .morelikethismodel
-                                                                .data!
                                                                 .data![index]
                                                                 .trailer!
                                                                 .description
@@ -1070,7 +1069,6 @@ class _ArpMovieSelectionScreenState extends State<ArpMovieSelectionScreen> {
                                                             'idforgetData',
                                                             state
                                                                 .morelikethismodel
-                                                                .data!
                                                                 .data![index]
                                                                 .id
                                                                 .toString());
@@ -1078,7 +1076,6 @@ class _ArpMovieSelectionScreenState extends State<ArpMovieSelectionScreen> {
                                                             'genre',
                                                             state
                                                                 .morelikethismodel
-                                                                .data!
                                                                 .data![index]
                                                                 .genre
                                                                 .toString());
@@ -1096,10 +1093,9 @@ class _ArpMovieSelectionScreenState extends State<ArpMovieSelectionScreen> {
                                                               CachedNetworkImage(
                                                             imageUrl: (state
                                                                 .morelikethismodel
-                                                                .data!
                                                                 .data![index]
                                                                 .trailer!
-                                                                .s3_image_url
+                                                                .s3ImageUrl
                                                                 .toString()),
                                                             height: 180,
                                                             width:
@@ -1130,9 +1126,8 @@ class _ArpMovieSelectionScreenState extends State<ArpMovieSelectionScreen> {
                                                           child: Image.network(
                                                             state
                                                                 .morelikethismodel
-                                                                .data!
                                                                 .data![index]
-                                                                .s3_logo_url
+                                                                .s3LogoUrl
                                                                 .toString(),
                                                             fit: BoxFit.fill,
                                                           ),
@@ -1141,7 +1136,7 @@ class _ArpMovieSelectionScreenState extends State<ArpMovieSelectionScreen> {
                                                           height: 5,
                                                         ),
                                                         Text(
-                                                          '${state.morelikethismodel.data!.data![index].city}, ${state.morelikethismodel.data!.data![index].state} - ${state.morelikethismodel.data!.data![index].genre}',
+                                                          '${state.morelikethismodel.data![index].city}, ${state.morelikethismodel.data![index].state} - ${state.morelikethismodel.data![index].genre}',
                                                           style: ArtistTextStyle
                                                               .smallHeadingTextStyle,
                                                         )

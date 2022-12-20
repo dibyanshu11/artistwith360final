@@ -315,7 +315,9 @@ class _SearchScreenState extends State<SearchScreen> {
                             const SizedBox(
                               height: 20,
                             ),
-                            state.arpSearchModel.data!.length.toInt() != 0
+                            state.arpSearchModel.data!.listing!.length
+                                        .toInt() !=
+                                    0
                                 ? GridView.builder(
                                     shrinkWrap: true,
                                     physics: const ScrollPhysics(),
@@ -325,8 +327,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                             mainAxisExtent: 300,
                                             crossAxisSpacing: 40,
                                             mainAxisSpacing: 0),
-                                    itemCount:
-                                        state.arpSearchModel.data!.length,
+                                    itemCount: state
+                                        .arpSearchModel.data!.listing!.length,
                                     itemBuilder: (BuildContext ctx, index) {
                                       return InkWell(
                                         focusColor: Colors.transparent,
@@ -334,14 +336,18 @@ class _SearchScreenState extends State<SearchScreen> {
                                         highlightColor: Colors.transparent,
                                         onTap: () {
                                           setState(() {
-                                            types = state.arpSearchModel
-                                                .data![index].trailer!.type
+                                            types = state.arpSearchModel.data!
+                                                .listing![index].trailer!.type
                                                 .toString();
                                           });
                                           prefHelper.saveString(
                                               'idforgetData',
-                                              state.arpSearchModel.data![index]
-                                                  .trailer!.documentaryId
+                                              state
+                                                  .arpSearchModel
+                                                  .data!
+                                                  .listing![index]
+                                                  .trailer!
+                                                  .documentaryId
                                                   .toString());
 
                                           Navigator.of(context).push(
@@ -361,7 +367,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                                 child: CachedNetworkImage(
                                                   imageUrl: (state
                                                       .arpSearchModel
-                                                      .data![index]
+                                                      .data!
+                                                      .listing![index]
                                                       .trailer!
                                                       .s3ImageUrl
                                                       .toString()),
@@ -385,7 +392,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                                 CachedNetworkImage(
                                                   imageUrl: (state
                                                       .arpSearchModel
-                                                      .data![index]
+                                                      .data!
+                                                      .listing![index]
                                                       .s3LogoUrl
                                                       .toString()),
                                                   height: 40,
@@ -400,7 +408,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                   height: 5,
                                                 ),
                                                 Text(
-                                                  '${state.arpSearchModel.data![index].city.toString()}, ${state.arpSearchModel.data![index].state.toString()} - ${state.arpSearchModel.data![index].genre.toString()}',
+                                                  '${state.arpSearchModel.data!.listing![index].city.toString()}, ${state.arpSearchModel.data!.listing![index].state.toString()} - ${state.arpSearchModel.data!.listing![index].genre.toString()}',
                                                   style: ArtistTextStyle
                                                       .smallHeadingTextStyle,
                                                 )
