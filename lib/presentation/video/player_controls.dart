@@ -91,6 +91,7 @@ class _VideoPlayerControlsState extends State<VideoPlayerControls>
     // setState to update our non-existent appearance.
     if (!mounted) return;
 
+    ///
     setState(() {});
   }
   // an arbitrary value, this can be whatever you need it to be

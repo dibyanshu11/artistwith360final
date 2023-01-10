@@ -62,6 +62,7 @@ class _VideoPlayer360ViewState extends State<VideoPlayer360View> {
     super.dispose();
   }
 
+  ///
   var textdd = '';
   var playPause = 0;
   var aspectReatio = 0;

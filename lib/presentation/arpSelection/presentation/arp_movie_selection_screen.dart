@@ -24,6 +24,7 @@ import 'package:http/http.dart' as http;
 import '../../video/video_360_player.dart';
 import '../../webview/privay_policy_screen.dart';
 
+///
 String counts = '1';
 var storeText = '';
 var types = '';
